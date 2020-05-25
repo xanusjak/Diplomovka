@@ -14,4 +14,4 @@ https://media.giphy.com/media/gLKgcEqBQmpNrBcurC/giphy.gif
 https://media.giphy.com/media/kfXJQhwlNZt8yJAsLw/giphy.gif
 
 ### 2.5.3 Nastavenia aplikácie
-//TODO:
+![Alt Text](https://media.giphy.com/media/dVoJGdiViu5G6BWB0L/giphy.gif)
