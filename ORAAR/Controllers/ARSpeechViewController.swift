@@ -51,8 +51,8 @@ class ARSpeechViewController: CoreMLViewController {
         super.viewDidLoad()
         
         navigationItem.rightBarButtonItems = [
-            UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(deleteObject(_:))),
-            UIBarButtonItem(barButtonSystemItem: .organize, target: self, action: #selector(showSettings(_:))),
+//            UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(deleteObject(_:))),
+            UIBarButtonItem(title: "Settings", style: .plain, target: self, action: #selector(showSettings(_:))),
             UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showSelection(_:)))
         ]
         
@@ -308,28 +308,28 @@ extension ARSpeechViewController {
 //  MARK: - ARSCNView Delegate
 
 extension ARSpeechViewController: ARSCNViewDelegate {
-    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-        
-        let meshNode : SCNNode
-        guard let planeAnchor = anchor as? ARPlaneAnchor else {
-            return
-        }
-        
-        guard let meshGeometry = ARSCNPlaneGeometry(device: sceneView.device!) else {
-                fatalError("Can't create plane geometry")
-        }
-        meshGeometry.update(from: planeAnchor.geometry)
-        meshNode = SCNNode(geometry: meshGeometry)
-        meshNode.opacity = 0.4
-        meshNode.name = "MeshNode"
-        
-        guard let material = meshNode.geometry?.firstMaterial else {
-            fatalError("ARSCNPlaneGeometry always has one material")
-        }
-        material.diffuse.contents = UIColor.blue
-        
-        node.addChildNode(meshNode)
-    }
+//    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+//
+//        let meshNode : SCNNode
+//        guard let planeAnchor = anchor as? ARPlaneAnchor else {
+//            return
+//        }
+//
+//        guard let meshGeometry = ARSCNPlaneGeometry(device: sceneView.device!) else {
+//                fatalError("Can't create plane geometry")
+//        }
+//        meshGeometry.update(from: planeAnchor.geometry)
+//        meshNode = SCNNode(geometry: meshGeometry)
+//        meshNode.opacity = 0.4
+//        meshNode.name = "MeshNode"
+//
+//        guard let material = meshNode.geometry?.firstMaterial else {
+//            fatalError("ARSCNPlaneGeometry always has one material")
+//        }
+//        material.diffuse.contents = UIColor.blue
+//
+//        node.addChildNode(meshNode)
+//    }
 //        let textNode : SCNNode
 //        let textGeometry = SCNText(string: "Plane", extrusionDepth: 1)
 //        textGeometry.font = UIFont(name: "Futura", size: 75)

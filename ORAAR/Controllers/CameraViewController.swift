@@ -12,6 +12,8 @@ import Vision
 
 class CameraViewController: UIViewController {
     
+    @IBOutlet var cameraView: UIView!
+    
     fileprivate var boundingBoxes = [BoundingBox]()
     fileprivate var request: VNCoreMLRequest!
     fileprivate var bufferSize: CGSize = .zero
@@ -24,6 +26,12 @@ class CameraViewController: UIViewController {
         setUpBoundingBoxes()
         setUpVision()
         setupCamera()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        self.previewLayer.frame = self.cameraView.bounds
     }
     
     //MARK: Setup BoundingBoxes
@@ -49,8 +57,9 @@ class CameraViewController: UIViewController {
         bufferSize.height = CGFloat(dimensions.height)
         
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        previewLayer.frame = view.frame
-        view.layer.addSublayer(previewLayer)
+        previewLayer.videoGravity = .resizeAspect
+        previewLayer.frame = self.cameraView.bounds
+        cameraView.layer.addSublayer(previewLayer)
         
         boxesLayer = CALayer()
         boxesLayer.frame = CGRect(x: 0, y: 0, width: bufferSize.width, height: bufferSize.height)

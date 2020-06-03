@@ -32,7 +32,7 @@ class SpeechRecognitionViewController: UIViewController {
     internal var inputNodeBus: AVAudioNodeBus = 0
     
     /// The speech recogniser used by the controller to record the user's speech.
-    private let speechRecogniser = SFSpeechRecognizer(locale: Locale(identifier: "en-GB"))!
+    private let speechRecogniser = SFSpeechRecognizer(locale: Locale(identifier: "en-US"))!
     
     /// The audio engine used to record input from the microphone.
     private var audioEngine = AVAudioEngine()
@@ -40,7 +40,7 @@ class SpeechRecognitionViewController: UIViewController {
     private var request: SFSpeechAudioBufferRecognitionRequest?
     
     private var recognitionTask: SFSpeechRecognitionTask?
-    
+//
     override func viewDidLoad() {
         super.viewDidLoad()
     }

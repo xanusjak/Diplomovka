@@ -17,7 +17,6 @@
 		8B5AFF4924619F3B00FBE6DE /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5AFF4824619F3B00FBE6DE /* Setting.swift */; };
 		8B5AFF4B2461A7EE00FBE6DE /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5AFF4A2461A7EE00FBE6DE /* SettingsManager.swift */; };
 		8B5AFF4D2462DC5500FBE6DE /* CoreMLViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5AFF4C2462DC5500FBE6DE /* CoreMLViewController.swift */; };
-		8B64D063240825CB0001E4E5 /* MobileNetV2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8B64D062240825CB0001E4E5 /* MobileNetV2.mlmodel */; };
 		8B64D065240825DC0001E4E5 /* YOLOv3.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8B64D064240825DC0001E4E5 /* YOLOv3.mlmodel */; };
 		8B67C4AE230F377000987A73 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B67C4AD230F377000987A73 /* AppDelegate.swift */; };
 		8B67C4B0230F377000987A73 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B67C4AF230F377000987A73 /* CameraViewController.swift */; };
@@ -50,7 +49,6 @@
 		8B5AFF4824619F3B00FBE6DE /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		8B5AFF4A2461A7EE00FBE6DE /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
 		8B5AFF4C2462DC5500FBE6DE /* CoreMLViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMLViewController.swift; sourceTree = "<group>"; };
-		8B64D062240825CB0001E4E5 /* MobileNetV2.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MobileNetV2.mlmodel; sourceTree = "<group>"; };
 		8B64D064240825DC0001E4E5 /* YOLOv3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = YOLOv3.mlmodel; sourceTree = "<group>"; };
 		8B67C4AA230F377000987A73 /* ORAAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ORAAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B67C4AD230F377000987A73 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -150,7 +148,6 @@
 				8B67C4BC230F377200987A73 /* Info.plist */,
 				8BAAEEC6243F1DC100B0502D /* HandClassifier.mlmodel */,
 				8B3225BF2415A5FC007002ED /* HandModelOnline.mlmodel */,
-				8B64D062240825CB0001E4E5 /* MobileNetV2.mlmodel */,
 				8B64D064240825DC0001E4E5 /* YOLOv3.mlmodel */,
 				8B67C4B4230F377100987A73 /* ORAAR.xcdatamodeld */,
 			);
@@ -285,7 +282,6 @@
 				8B241C7D2396A82500E4EAB3 /* ARMultipeerViewController.swift in Sources */,
 				8B5AFF4924619F3B00FBE6DE /* Setting.swift in Sources */,
 				8B5AFF4B2461A7EE00FBE6DE /* SettingsManager.swift in Sources */,
-				8B64D063240825CB0001E4E5 /* MobileNetV2.mlmodel in Sources */,
 				8B3BF50024429BBB004AA800 /* SpeechRecognitionViewController.swift in Sources */,
 				8BC66D852403CECA00FC8573 /* SelectionCell.swift in Sources */,
 				8BC2908A23576E3300638914 /* VideosViewController.swift in Sources */,

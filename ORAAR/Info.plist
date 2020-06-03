@@ -23,7 +23,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>This app will use camera for CoreML an ARKit experience.</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>micro?</string>
+	<string>his app will use camera for Speech</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This app will use library.</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
