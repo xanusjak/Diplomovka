@@ -10,6 +10,7 @@ import UIKit
 
 protocol SettingsViewControllerDelegate {
     func settingUpdated(_ setting: Setting)
+    func distanceChanged()
 }
 
 class SettingsViewController: UIViewController {
@@ -20,6 +21,8 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var gesturesControl: UISegmentedControl!
     @IBOutlet weak var logsControl: UISegmentedControl!
     
+    @IBOutlet weak var distanceEyeContainer: UIStackView!
+    
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var distanceStepper: UIStepper!
     
@@ -28,10 +31,10 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        distanceLabel.text = String(format: "Vzdialenost oci %.2f m", pupilsDistance)
+        distanceLabel.text = String(format: "Point distance %.3f m", pupilsDistance)
         distanceStepper.value = Double(pupilsDistance)
-        distanceStepper.minimumValue = 0.002
-        distanceStepper.maximumValue = 0.096
+        distanceStepper.minimumValue = 0.0
+        distanceStepper.maximumValue = 0.1
         distanceStepper.stepValue = 0.002
 
         speechControl.selectedSegmentIndex = SettingsManager.speechEnabled ? 0 : 1
@@ -57,6 +60,7 @@ class SettingsViewController: UIViewController {
     
     @IBAction private func vrModeValueChanged(_ sender: UISegmentedControl) {
         SettingsManager.vrModeEnabled = sender.selectedSegmentIndex == 0
+        
         delegate?.settingUpdated(Setting.vrMode)
     }
     
@@ -72,6 +76,7 @@ class SettingsViewController: UIViewController {
     
     @IBAction func stepperValueChanged(_ sender: UIStepper) {
         pupilsDistance = Float(sender.value)
-        distanceLabel.text =  String(format: "Vzdialenost oci %.3f m", pupilsDistance)
+        distanceLabel.text =  String(format: "Point distance %.3f m", pupilsDistance)
+        delegate?.distanceChanged()
     }
 }

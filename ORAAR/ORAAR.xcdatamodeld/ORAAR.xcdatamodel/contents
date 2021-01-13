@@ -1,4 +1,51 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19F101" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Detail" representedClassName="Detail" syncable="YES" codeGenerationType="class">
+        <attribute name="icon" optional="YES" attributeType="String"/>
+        <attribute name="templateTitle" optional="YES" attributeType="String"/>
+        <attribute name="templateType" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="templateData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TemplateData"/>
+    </entity>
+    <entity name="Product" representedClassName="Product" syncable="YES" codeGenerationType="class">
+        <attribute name="costInformation" optional="YES"/>
+        <attribute name="focus" optional="YES"/>
+        <attribute name="id" optional="YES"/>
+        <attribute name="longName" optional="YES"/>
+        <attribute name="name" optional="YES"/>
+        <attribute name="orderGroupId" optional="YES"/>
+        <attribute name="skillAndRiskCharacteristics" optional="YES"/>
+        <attribute name="weightingInformation" optional="YES"/>
+        <relationship name="detailViews" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Detail"/>
+    </entity>
+    <entity name="ProductCategory" representedClassName="ProductCategory" syncable="YES" codeGenerationType="class">
+        <attribute name="description." optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="strategy" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Product"/>
+    </entity>
+    <entity name="ProductMessage" representedClassName="ProductMessage" syncable="YES" codeGenerationType="class">
+        <attribute name="isMock" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="lastModified" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="productGroupedByCategory" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ProductCategory"/>
+    </entity>
+    <entity name="TemplateData" representedClassName="TemplateData" syncable="YES" codeGenerationType="class">
+        <attribute name="chart" optional="YES"/>
+        <attribute name="chartComparisonItems" optional="YES"/>
+        <attribute name="data" optional="YES"/>
+        <attribute name="description." optional="YES"/>
+        <attribute name="features" optional="YES"/>
+        <attribute name="footnote" optional="YES"/>
+        <attribute name="performanceData" optional="YES"/>
+        <attribute name="shouldDisplayLegend" optional="YES"/>
+        <attribute name="summary" optional="YES"/>
+        <attribute name="table" optional="YES"/>
+        <attribute name="templateGridItems" optional="YES"/>
+    </entity>
+    <elements>
+        <element name="ProductMessage" positionX="-471.4375" positionY="259.50390625" width="172.28125" height="88"/>
+        <element name="ProductCategory" positionX="-242.33203125" positionY="259.96484375" width="128" height="88"/>
+        <element name="Product" positionX="-51.59765625" positionY="212.33203125" width="180.25390625" height="178"/>
+        <element name="Detail" positionX="181.01953125" positionY="244.90234375" width="128" height="118"/>
+        <element name="TemplateData" positionX="367.1796875" positionY="205.75" width="128" height="208"/>
+    </elements>
 </model>

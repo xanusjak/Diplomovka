@@ -10,16 +10,18 @@ import UIKit
 import ARKit
 import Vision
 
-var pupilsDistance: Float = 0.020 //0.066  // This is the value for the distance between two pupils (in metres). The Interpupilary Distance (IPD).
+var pupilsDistance: Float = 0.066 //0.066  // This is the value for the distance between two pupils (in metres). The Interpupilary Distance (IPD).
 
 class ARSpeechViewController: CoreMLViewController {
     
     @IBOutlet weak var sceneView: ARSCNView!
     @IBOutlet weak var copySceneView: ARSCNView!
+//    @IBOutlet weak var rightEyeSceneView: ARSCNView!
     
     @IBOutlet weak var logsStackView: UIStackView!
     @IBOutlet weak var logsLabel: UILabel!
     @IBOutlet weak var copyLogsLabel: UILabel!
+//    @IBOutlet weak var rightLogsLabel: UILabel!
     
     private var nodeName: String? {
         didSet { self.title = nodeName }
@@ -91,14 +93,19 @@ class ARSpeechViewController: CoreMLViewController {
         copySceneView.session.delegate = self
         copySceneView.scene = sceneView.scene
         
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(addNodeToSceneView(_:)))
-//                    sceneView.addGestureRecognizer(tapGestureRecognizer)
-        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(scaleNode(_:)))
-        //            sceneView.addGestureRecognizer(pinchGesture)
-        let rotateGesture = UIRotationGestureRecognizer(target: self, action: #selector(rotateNode(_:)))
-        //            sceneView.addGestureRecognizer(rotateGesture)
-        let panRecognizer = UIPanGestureRecognizer(target: self, action: #selector(moveNode(_:)))
-        //            sceneView.addGestureRecognizer(panRecognizer)
+//        rightEyeSceneView.delegate = self
+//        rightEyeSceneView.session.delegate = self
+//        rightEyeSceneView.scene = sceneView.scene
+        
+        let tapGestureRecognizer =
+            UITapGestureRecognizer(target: self, action: #selector(addNodeToSceneView(_:)))
+        let pinchGesture =
+            UIPinchGestureRecognizer(target: self, action: #selector(scaleNode(_:)))
+        let rotateGesture =
+            UIRotationGestureRecognizer(target: self, action: #selector(rotateNode(_:)))
+        let panRecognizer =
+            UIPanGestureRecognizer(target: self, action: #selector(moveNode(_:)))
+        
         gestures = [tapGestureRecognizer, pinchGesture, rotateGesture, panRecognizer]
         
         if SettingsManager.gesturesEnabled {
@@ -364,23 +371,37 @@ extension ARSpeechViewController: ARSCNViewDelegate {
     func updateCopySceneView() {
         // Clone pointOfView for SecondView
         let pointOfView : SCNNode = (sceneView.pointOfView?.clone())!
-        copySceneView.pointOfView = pointOfView
         
-//        // Determine Adjusted Position for Right Eye
-//        let orientation : SCNQuaternion = pointOfView.orientation
-//        let orientationQuaternion : GLKQuaternion = GLKQuaternionMake(orientation.x, orientation.y, orientation.z, orientation.w)
-//        let eyePos : GLKVector3 = GLKVector3Make(1.0, 0.0, 0.0)
-//        let rotatedEyePos : GLKVector3 = GLKQuaternionRotateVector3(orientationQuaternion, eyePos)
-//        let rotatedEyePosSCNV : SCNVector3 = SCNVector3Make(rotatedEyePos.x, rotatedEyePos.y, rotatedEyePos.z)
-//
-//        let mag : Float = pupilsDistance //0.066 // This is the value for the distance between two pupils (in metres). The Interpupilary Distance (IPD).
-//        print("MAAAAAAG \(mag)")
-//        pointOfView.position.x += rotatedEyePosSCNV.x * mag
-//        pointOfView.position.y += rotatedEyePosSCNV.y * mag
-//        pointOfView.position.z += rotatedEyePosSCNV.z * mag
-//
-        // Set PointOfView for SecondView
-//        copySceneView.pointOfView = pointOfView
+        if pupilsDistance == 0 {
+            copySceneView.pointOfView = pointOfView
+            
+        } else {
+            // Clone pointOfView for SecondView
+            let pointOfView : SCNNode = (sceneView.pointOfView?.clone())!
+            
+            // Determine Adjusted Position for Right Eye
+//            let orientation : SCNQuaternion = pointOfView.orientation
+//            let orientationQuaternion : GLKQuaternion = GLKQuaternionMake(orientation.x, orientation.y, orientation.z, orientation.w)
+//            let eyePos : GLKVector3 = GLKVector3Make(1.0, 0.0, 0.0)
+//            let rotatedEyePos : GLKVector3 = GLKQuaternionRotateVector3(orientationQuaternion, eyePos)
+//            let rotatedEyePosSCNV : SCNVector3 = SCNVector3Make(rotatedEyePos.x, rotatedEyePos.y, rotatedEyePos.z)
+
+            // Determine Adjusted Position for Right Eye
+              let orientation : SCNQuaternion = pointOfView.orientation
+              let orientationQuaternion : GLKQuaternion = GLKQuaternionMake(orientation.x, orientation.y, orientation.z, orientation.w)
+              let eyePos : GLKVector3 = GLKVector3Make(1.0, 0.0, 0.0)
+              let rotatedEyePos : GLKVector3 = GLKQuaternionRotateVector3(orientationQuaternion, eyePos)
+              let rotatedEyePosSCNV : SCNVector3 = SCNVector3Make(rotatedEyePos.x, rotatedEyePos.y, rotatedEyePos.z)
+              
+            
+            let mag : Float = pupilsDistance
+            pointOfView.position.x += rotatedEyePosSCNV.x * mag
+            pointOfView.position.y += rotatedEyePosSCNV.y * mag
+            pointOfView.position.z += rotatedEyePosSCNV.z * mag
+
+            // Set PointOfView for SecondView
+            copySceneView.pointOfView = pointOfView
+        }
     }
 }
 
@@ -442,6 +463,9 @@ extension ARSpeechViewController: SelectionViewControllerDelegate {
 // MARK: - SettingsViewController Delegate
 
 extension ARSpeechViewController: SettingsViewControllerDelegate {
+    func distanceChanged() {
+    }
+    
     func settingUpdated(_ setting: Setting) {
         updateSetting(setting)
     }
@@ -454,8 +478,14 @@ extension ARSpeechViewController: SettingsViewControllerDelegate {
             
         case .vrMode:
             let isHidden = !SettingsManager.vrModeEnabled
+//            sceneView.isHidden = !isHidden
+//            logsLabel.isHidden = !isHidden
+            
             self.copySceneView.isHidden = isHidden
             self.copyLogsLabel.isHidden = isHidden
+//            self.rightEyeSceneView.isHidden = isHidden
+//            self.rightLogsLabel.isHidden = isHidden
+            
             self.view.layoutIfNeeded()
             
         case .gestures:
